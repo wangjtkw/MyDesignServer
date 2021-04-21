@@ -1,0 +1,11 @@
+
+spring:
+  datasource:
+    username: root
+    password: 1300421975a
+    url: jdbc:mysql://localhost:3306/mydesign?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.example.mydegign.entity

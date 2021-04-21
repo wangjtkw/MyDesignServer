@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.EducationExperiencesMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.EducationExperiences">
+        <id column="education_experiences_id" jdbcType="INTEGER" property="educationExperiencesId"/>
+        <result column="education_experiences_education" jdbcType="VARCHAR" property="educationExperiencesEducation"/>
+        <result column="education_experiences_school" jdbcType="VARCHAR" property="educationExperiencesSchool"/>
+        <result column="education_experiences_enter_date" jdbcType="VARCHAR" property="educationExperiencesEnterDate"/>
+        <result column="education_experiences_major" jdbcType="VARCHAR" property="educationExperiencesMajor"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from education_experiences
+        where education_experiences_id = #{educationExperiencesId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.EducationExperiences">
+        <selectKey keyProperty="educationExperiencesId" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+        insert into education_experiences (education_experiences_id, education_experiences_education,
+        education_experiences_school, education_experiences_enter_date,
+        education_experiences_major)
+        values (#{educationExperiencesId,jdbcType=INTEGER}, #{educationExperiencesEducation,jdbcType=VARCHAR},
+        #{educationExperiencesSchool,jdbcType=VARCHAR}, #{educationExperiencesEnterDate,jdbcType=VARCHAR},
+        #{educationExperiencesMajor,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.EducationExperiences">
+        update education_experiences
+        set education_experiences_education  = #{educationExperiencesEducation,jdbcType=VARCHAR},
+            education_experiences_school     = #{educationExperiencesSchool,jdbcType=VARCHAR},
+            education_experiences_enter_date = #{educationExperiencesEnterDate,jdbcType=VARCHAR},
+            education_experiences_major      = #{educationExperiencesMajor,jdbcType=VARCHAR}
+        where education_experiences_id = #{educationExperiencesId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.EducationExperiences">
+        update education_experiences
+        <set>
+            <if test="educationExperiencesEducation != null">
+                education_experiences_education = #{educationExperiencesEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="educationExperiencesSchool != null">
+                education_experiences_school = #{educationExperiencesSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="educationExperiencesEnterDate != null">
+                education_experiences_enter_date = #{educationExperiencesEnterDate,jdbcType=VARCHAR},
+            </if>
+            <if test="educationExperiencesMajor != null">
+                education_experiences_major = #{educationExperiencesMajor,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where education_experiences_id = #{educationExperiencesId,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select education_experiences_id,
+               education_experiences_education,
+               education_experiences_school,
+               education_experiences_enter_date,
+               education_experiences_major
+        from education_experiences
+        where education_experiences_id = #{educationExperiencesId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select education_experiences_id,
+               education_experiences_education,
+               education_experiences_school,
+               education_experiences_enter_date,
+               education_experiences_major
+        from education_experiences
+    </select>
+</mapper>

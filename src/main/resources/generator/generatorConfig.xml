@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!--此处需要更换-->
+    <classPathEntry
+            location="C:\Users\TKW\.m2\repository\org\mybatis\generator\mybatis-generator-core\1.4.0\mybatis-generator-core-1.4.0.jar"/>
+
+    <context id="context" targetRuntime="MyBatis3Simple">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection userId="root" password="1300421975a" driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mydesign?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true&amp;useSSL=false&amp;serverTimezone=UTC"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.example.mydegign.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.example.mydegign.mapper" type="XMLMAPPER"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--        <table schema="UsersAccount"-->
+        <!--               tableName="users_account"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false"/>-->
+
+        <!--        <table schema="EmployerAccount"-->
+        <!--               tableName="employer_account"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false"/>-->
+
+        <!--                <table schema="EmployerPersonalInfo"-->
+        <!--                       tableName="employer_personal_info"-->
+        <!--                       enableCountByExample="false"-->
+        <!--                       enableDeleteByExample="false"-->
+        <!--                       enableSelectByExample="false"-->
+        <!--                       enableUpdateByExample="false"/>-->
+
+<!--                <table schema="EmployerCompanyInfo"-->
+<!--                       tableName="employer_company_info"-->
+<!--                       enableCountByExample="false"-->
+<!--                       enableDeleteByExample="false"-->
+<!--                       enableSelectByExample="false"-->
+<!--                       enableUpdateByExample="false"/>-->
+
+        <!--        <table schema="EmployerPosition"-->
+        <!--               tableName="employer_position"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false"/>-->
+
+        <!--        <table schema="PositionRequirement"-->
+        <!--               tableName="position_requirement"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false"/>-->
+
+        <!--        <table schema="UsersAccount"-->
+        <!--               tableName="users_account"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false"/>-->
+
+
+        <!--        <table schema="Users"-->
+        <!--               tableName="users"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false"/>-->
+
+        <!--        <table schema="EducationExperiences"-->
+        <!--               tableName="education_experiences"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false"/>-->
+
+<!--        <table schema="CurriculumVitae"-->
+<!--               tableName="curriculum_vitae"-->
+<!--               enableCountByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               enableUpdateByExample="false"/>-->
+
+        <table schema="Records"
+               tableName="records"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+    </context>
+</generatorConfiguration>

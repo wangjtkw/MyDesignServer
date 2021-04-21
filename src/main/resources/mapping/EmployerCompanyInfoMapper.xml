@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.EmployerCompanyInfoMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.EmployerCompanyInfo">
+        <id column="employer_company_info_id" jdbcType="INTEGER" property="employerCompanyInfoId"/>
+        <result column="employer_company_info_name" jdbcType="VARCHAR" property="employerCompanyInfoName"/>
+        <result column="employer_company_info_company_type" jdbcType="VARCHAR"
+                property="employerCompanyInfoCompanyType"/>
+        <result column="employer_company_info_business_state" jdbcType="VARCHAR"
+                property="employerCompanyInfoBusinessState"/>
+        <result column="employer_company_info_found_time" jdbcType="VARCHAR" property="employerCompanyInfoFoundTime"/>
+        <result column="employer_company_info_register_address" jdbcType="VARCHAR"
+                property="employerCompanyInfoRegisterAddress"/>
+        <result column="employer_company_info_uniform_social_credit_code" jdbcType="VARCHAR"
+                property="employerCompanyInfoUniformSocialCreditCode"/>
+        <result column="employer_company_info_organization_code" jdbcType="VARCHAR"
+                property="employerCompanyInfoOrganizationCode"/>
+        <result column="employer_company_info_business_scope" jdbcType="VARCHAR"
+                property="employerCompanyInfoBusinessScope"/>
+        <result column="employer_company_info_audit_state" jdbcType="VARCHAR" property="employerCompanyInfoAuditState"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from employer_company_info
+        where employer_company_info_id = #{employerCompanyInfoId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.EmployerCompanyInfo">
+        <selectKey keyProperty="employerCompanyInfoId" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+        insert into employer_company_info (employer_company_info_id, employer_company_info_name,
+        employer_company_info_company_type, employer_company_info_business_state,
+        employer_company_info_found_time, employer_company_info_register_address,
+        employer_company_info_uniform_social_credit_code, employer_company_info_organization_code,
+        employer_company_info_business_scope, employer_company_info_audit_state
+        )
+        values (#{employerCompanyInfoId,jdbcType=INTEGER}, #{employerCompanyInfoName,jdbcType=VARCHAR},
+        #{employerCompanyInfoCompanyType,jdbcType=VARCHAR}, #{employerCompanyInfoBusinessState,jdbcType=VARCHAR},
+        #{employerCompanyInfoFoundTime,jdbcType=VARCHAR}, #{employerCompanyInfoRegisterAddress,jdbcType=VARCHAR},
+        #{employerCompanyInfoUniformSocialCreditCode,jdbcType=VARCHAR},
+        #{employerCompanyInfoOrganizationCode,jdbcType=VARCHAR},
+        #{employerCompanyInfoBusinessScope,jdbcType=VARCHAR}, #{employerCompanyInfoAuditState,jdbcType=VARCHAR}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.EmployerCompanyInfo">
+        update employer_company_info
+        <set>
+            <if test="employerCompanyInfoName != null">
+                employer_company_info_name = #{employerCompanyInfoName,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoCompanyType != null">
+                employer_company_info_company_type = #{employerCompanyInfoCompanyType,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoBusinessState != null">
+                employer_company_info_business_state = #{employerCompanyInfoBusinessState,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoFoundTime != null">
+                employer_company_info_found_time = #{employerCompanyInfoFoundTime,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoRegisterAddress != null">
+                employer_company_info_register_address = #{employerCompanyInfoRegisterAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoUniformSocialCreditCode != null">
+                employer_company_info_uniform_social_credit_code =
+                #{employerCompanyInfoUniformSocialCreditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoOrganizationCode != null">
+                employer_company_info_organization_code = #{employerCompanyInfoOrganizationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoBusinessScope != null">
+                employer_company_info_business_scope = #{employerCompanyInfoBusinessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="employerCompanyInfoAuditState != null">
+                employer_company_info_audit_state = #{employerCompanyInfoAuditState,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where employer_company_info_id = #{employerCompanyInfoId,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select employer_company_info_id,
+               employer_company_info_name,
+               employer_company_info_company_type,
+               employer_company_info_business_state,
+               employer_company_info_found_time,
+               employer_company_info_register_address,
+               employer_company_info_uniform_social_credit_code,
+               employer_company_info_organization_code,
+               employer_company_info_business_scope,
+               employer_company_info_audit_state
+        from employer_company_info
+        where employer_company_info_id = #{employerCompanyInfoId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select employer_company_info_id,
+               employer_company_info_name,
+               employer_company_info_company_type,
+               employer_company_info_business_state,
+               employer_company_info_found_time,
+               employer_company_info_register_address,
+               employer_company_info_uniform_social_credit_code,
+               employer_company_info_organization_code,
+               employer_company_info_business_scope,
+               employer_company_info_audit_state
+        from employer_company_info
+    </select>
+
+    <select id="selectAllByState" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select employer_company_info_id,
+               employer_company_info_name,
+               employer_company_info_company_type,
+               employer_company_info_business_state,
+               employer_company_info_found_time,
+               employer_company_info_register_address,
+               employer_company_info_uniform_social_credit_code,
+               employer_company_info_organization_code,
+               employer_company_info_business_scope,
+               employer_company_info_audit_state
+        from employer_company_info
+        where employer_company_info_audit_state = #{state,jdbcType=VARCHAR}
+    </select>
+</mapper>

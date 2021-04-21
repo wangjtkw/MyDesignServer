@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.UsersMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.Users">
+        <id column="users_id" jdbcType="INTEGER" property="usersId"/>
+        <result column="curriculum_vitae_id" jdbcType="INTEGER" property="curriculumVitaeId"/>
+        <result column="user_personal_tag_id" jdbcType="INTEGER" property="userPersonalTagId"/>
+        <result column="education_experiences_id" jdbcType="INTEGER" property="educationExperiencesId"/>
+        <result column="users_img" jdbcType="VARCHAR" property="usersImg"/>
+        <result column="users_name" jdbcType="VARCHAR" property="usersName"/>
+        <result column="users_sex" jdbcType="VARCHAR" property="usersSex"/>
+        <result column="users_birthday" jdbcType="VARCHAR" property="usersBirthday"/>
+        <result column="users_role" jdbcType="VARCHAR" property="usersRole"/>
+        <result column="users_phone_num" jdbcType="VARCHAR" property="usersPhoneNum"/>
+        <result column="users_wechat" jdbcType="VARCHAR" property="usersWechat"/>
+        <result column="users_qq" jdbcType="VARCHAR" property="usersQq"/>
+        <result column="users_self_description" jdbcType="VARCHAR" property="usersSelfDescription"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from users
+        where users_id = #{usersId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.Users">
+        <selectKey keyProperty="usersId" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+        insert into users (users_id, curriculum_vitae_id, user_personal_tag_id,
+        education_experiences_id, users_img, users_name,
+        users_sex, users_birthday, users_role,
+        users_phone_num, users_wechat, users_qq,
+        users_self_description)
+        values (#{usersId,jdbcType=INTEGER}, #{curriculumVitaeId,jdbcType=INTEGER},
+        #{userPersonalTagId,jdbcType=INTEGER},
+        #{educationExperiencesId,jdbcType=INTEGER}, #{usersImg,jdbcType=VARCHAR}, #{usersName,jdbcType=VARCHAR},
+        #{usersSex,jdbcType=VARCHAR}, #{usersBirthday,jdbcType=VARCHAR}, #{usersRole,jdbcType=VARCHAR},
+        #{usersPhoneNum,jdbcType=VARCHAR}, #{usersWechat,jdbcType=VARCHAR}, #{usersQq,jdbcType=VARCHAR},
+        #{usersSelfDescription,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.Users">
+        update users
+        set curriculum_vitae_id      = #{curriculumVitaeId,jdbcType=INTEGER},
+            user_personal_tag_id     = #{userPersonalTagId,jdbcType=INTEGER},
+            education_experiences_id = #{educationExperiencesId,jdbcType=INTEGER},
+            users_img                = #{usersImg,jdbcType=VARCHAR},
+            users_name               = #{usersName,jdbcType=VARCHAR},
+            users_sex                = #{usersSex,jdbcType=VARCHAR},
+            users_birthday           = #{usersBirthday,jdbcType=VARCHAR},
+            users_role               = #{usersRole,jdbcType=VARCHAR},
+            users_phone_num          = #{usersPhoneNum,jdbcType=VARCHAR},
+            users_wechat             = #{usersWechat,jdbcType=VARCHAR},
+            users_qq                 = #{usersQq,jdbcType=VARCHAR},
+            users_self_description   = #{usersSelfDescription,jdbcType=VARCHAR}
+        where users_id = #{usersId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.Users">
+        update users
+        <set>
+            <if test="curriculumVitaeId != null">
+                curriculum_vitae_id = #{curriculumVitaeId,jdbcType=INTEGER},
+            </if>
+            <if test="userPersonalTagId !=null">
+                user_personal_tag_id = #{userPersonalTagId,jdbcType=INTEGER},
+            </if>
+            <if test="educationExperiencesId != null">
+                education_experiences_id = #{educationExperiencesId,jdbcType=INTEGER},
+            </if>
+            <if test="usersImg != null">
+                users_img = #{usersImg,jdbcType=VARCHAR},
+            </if>
+            <if test="usersName != null">
+                users_name = #{usersName,jdbcType=VARCHAR},
+            </if>
+            <if test="usersSex != null">
+                users_sex = #{usersSex,jdbcType=VARCHAR},
+            </if>
+            <if test="usersBirthday != null">
+                users_birthday = #{usersBirthday,jdbcType=VARCHAR},
+            </if>
+            <if test="usersRole != null">
+                users_role = #{usersRole,jdbcType=VARCHAR},
+            </if>
+            <if test="usersPhoneNum != null">
+                users_phone_num = #{usersPhoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="usersWechat != null">
+                users_wechat = #{usersWechat,jdbcType=VARCHAR},
+            </if>
+            <if test="usersQq != null">
+                users_qq = #{usersQq,jdbcType=VARCHAR},
+            </if>
+            <if test="usersSelfDescription != null">
+                users_self_description = #{usersSelfDescription,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where users_id = #{usersId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select users_id,
+               curriculum_vitae_id,
+               user_personal_tag_id,
+               education_experiences_id,
+               users_img,
+               users_name,
+               users_sex,
+               users_birthday,
+               users_role,
+               users_phone_num,
+               users_wechat,
+               users_qq,
+               users_self_description
+        from users
+        where users_id = #{usersId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select users_id,
+               curriculum_vitae_id,
+               user_personal_tag_id,
+               education_experiences_id,
+               users_img,
+               users_name,
+               users_sex,
+               users_birthday,
+               users_role,
+               users_phone_num,
+               users_wechat,
+               users_qq,
+               users_self_description
+        from users
+    </select>
+</mapper>

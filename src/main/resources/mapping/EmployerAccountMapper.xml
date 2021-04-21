@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.EmployerAccountMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.EmployerAccount">
+        <id column="employer_account_id" jdbcType="INTEGER" property="employerAccountId"/>
+        <result column="employer_personal_info_id" jdbcType="INTEGER" property="employerPersonalInfoId"/>
+        <result column="employer_company_info" jdbcType="INTEGER" property="employerCompanyInfo"/>
+        <result column="employer_account_account" jdbcType="VARCHAR" property="employerAccountAccount"/>
+        <result column="employer_account_password" jdbcType="VARCHAR" property="employerAccountPassword"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from employer_account
+        where employer_account_id = #{employerAccountId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.EmployerAccount">
+        <selectKey keyProperty="employerAccountId" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+        insert into employer_account (employer_account_id, employer_personal_info_id,
+        employer_company_info, employer_account_account,
+        employer_account_password)
+        values (#{employerAccountId,jdbcType=INTEGER}, #{employerPersonalInfoId,jdbcType=INTEGER},
+        #{employerCompanyInfo,jdbcType=INTEGER}, #{employerAccountAccount,jdbcType=VARCHAR},
+        #{employerAccountPassword,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.EmployerAccount">
+        update employer_account
+        <set>
+            <if test="employerPersonalInfoId != null">
+                employer_personal_info_id = #{employerPersonalInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="employerCompanyInfo != null">
+                employer_company_info = #{employerCompanyInfo,jdbcType=INTEGER},
+            </if>
+            <if test="employerAccountAccount != null">
+                employer_account_account = #{employerAccountAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="employerAccountPassword != null">
+                employer_account_password = #{employerAccountPassword,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where employer_account_id = #{employerAccountId,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.EmployerAccount">
+        update employer_account
+        set employer_personal_info_id = #{employerPersonalInfoId,jdbcType=INTEGER},
+            employer_company_info     = #{employerCompanyInfo,jdbcType=INTEGER},
+            employer_account_account  = #{employerAccountAccount,jdbcType=VARCHAR},
+            employer_account_password = #{employerAccountPassword,jdbcType=VARCHAR}
+        where employer_account_id = #{employerAccountId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select employer_account_id,
+               employer_personal_info_id,
+               employer_company_info,
+               employer_account_account,
+               employer_account_password
+        from employer_account
+        where employer_account_id = #{employerAccountId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByCompanyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select employer_account_id,
+               employer_personal_info_id,
+               employer_company_info,
+               employer_account_account,
+               employer_account_password
+        from employer_account
+        where employer_company_info = #{companyId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByAccount" parameterType="String" resultMap="BaseResultMap">
+        select employer_account_id,
+               employer_personal_info_id,
+               employer_company_info,
+               employer_account_account,
+               employer_account_password
+        from employer_account
+        where employer_account_account = #{account,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select employer_account_id,
+               employer_personal_info_id,
+               employer_company_info,
+               employer_account_account,
+               employer_account_password
+        from employer_account
+    </select>
+</mapper>

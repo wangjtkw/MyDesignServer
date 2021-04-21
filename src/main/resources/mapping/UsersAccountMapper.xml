@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.UsersAccountMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.UsersAccount">
+        <id column="users_account_id" jdbcType="INTEGER" property="usersAccountId"/>
+        <result column="users_id" jdbcType="INTEGER" property="usersId"/>
+        <result column="users_account_account" jdbcType="VARCHAR" property="usersAccountAccount"/>
+        <result column="users_account_password" jdbcType="VARCHAR" property="usersAccountPassword"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from users_account
+        where users_account_id = #{usersAccountId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.UsersAccount">
+        insert into users_account (users_account_id, users_id, users_account_account,
+                                   users_account_password)
+        values (#{usersAccountId,jdbcType=INTEGER}, #{usersId,jdbcType=INTEGER},
+                #{usersAccountAccount,jdbcType=VARCHAR},
+                #{usersAccountPassword,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.UsersAccount">
+        update users_account
+        set users_id               = #{usersId,jdbcType=INTEGER},
+            users_account_account  = #{usersAccountAccount,jdbcType=VARCHAR},
+            users_account_password = #{usersAccountPassword,jdbcType=VARCHAR}
+        where users_account_id = #{usersAccountId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.UsersAccount">
+        update users_account
+        <set>
+            <if test="usersId != null">
+                users_id = #{usersId,jdbcType=INTEGER},
+            </if>
+            <if test="usersAccountAccount != null">
+                users_account_account = #{usersAccountAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="usersAccountPassword != null">
+                users_account_password = #{usersAccountPassword,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where users_account_id = #{usersAccountId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select users_account_id, users_id, users_account_account, users_account_password
+        from users_account
+        where users_account_id = #{usersAccountId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select users_account_id, users_id, users_account_account, users_account_password
+        from users_account
+    </select>
+
+    <select id="selectByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select users_account_id, users_id, users_account_account, users_account_password
+        from users_account
+        where users_account_account = #{account,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.EmployerPositionMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.EmployerPosition">
+        <id column="employer_position_id" jdbcType="INTEGER" property="employerPositionId"/>
+        <result column="position_requirement_id" jdbcType="INTEGER" property="positionRequirementId"/>
+        <result column="employer_account_id" jdbcType="INTEGER" property="employerAccountId"/>
+        <result column="employer_position_title" jdbcType="VARCHAR" property="employerPositionTitle"/>
+        <result column="employer_position_content" jdbcType="VARCHAR" property="employerPositionContent"/>
+        <result column="employer_position_person_num" jdbcType="VARCHAR" property="employerPositionPersonNum"/>
+        <result column="employer_position_img" jdbcType="VARCHAR" property="employerPositionImg"/>
+        <result column="employer_position_salary" jdbcType="VARCHAR" property="employerPositionSalary"/>
+        <result column="employer_position_settlement" jdbcType="VARCHAR" property="employerPositionSettlement"/>
+        <result column="employer_position_welfare" jdbcType="VARCHAR" property="employerPositionWelfare"/>
+        <result column="employer_position_place" jdbcType="VARCHAR" property="employerPositionPlace"/>
+        <result column="employer_position_date" jdbcType="VARCHAR" property="employerPositionDate"/>
+        <result column="employer_position_connect_type" jdbcType="VARCHAR" property="employerPositionConnectType"/>
+        <result column="employer_position_connect_info" jdbcType="VARCHAR" property="employerPositionConnectInfo"/>
+        <result column="employer_position_person_requirements" jdbcType="VARCHAR"
+                property="employerPositionPersonRequirements"/>
+        <result column="employer_position_industry" jdbcType="VARCHAR" property="employerPositionIndustry"/>
+        <result column="employer_position_city" jdbcType="VARCHAR" property="employerPositionCity"/>
+        <result column="employer_position_state" jdbcType="VARCHAR" property="employerPositionState"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from employer_position
+        where employer_position_id = #{employerPositionId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.EmployerPosition">
+        <selectKey keyProperty="employerPositionId" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+        insert into employer_position (employer_position_id, position_requirement_id,
+        employer_account_id, employer_position_title,
+        employer_position_content, employer_position_person_num,
+        employer_position_img, employer_position_salary,
+        employer_position_settlement, employer_position_welfare,
+        employer_position_place, employer_position_date,
+        employer_position_connect_type, employer_position_connect_info,
+        employer_position_person_requirements, employer_position_industry,
+        employer_position_city, employer_position_state
+        )
+        values (#{employerPositionId,jdbcType=INTEGER}, #{positionRequirementId,jdbcType=INTEGER},
+        #{employerAccountId,jdbcType=INTEGER}, #{employerPositionTitle,jdbcType=VARCHAR},
+        #{employerPositionContent,jdbcType=VARCHAR}, #{employerPositionPersonNum,jdbcType=VARCHAR},
+        #{employerPositionImg,jdbcType=VARCHAR}, #{employerPositionSalary,jdbcType=VARCHAR},
+        #{employerPositionSettlement,jdbcType=VARCHAR}, #{employerPositionWelfare,jdbcType=VARCHAR},
+        #{employerPositionPlace,jdbcType=VARCHAR}, #{employerPositionDate,jdbcType=VARCHAR},
+        #{employerPositionConnectType,jdbcType=VARCHAR}, #{employerPositionConnectInfo,jdbcType=VARCHAR},
+        #{employerPositionPersonRequirements,jdbcType=VARCHAR}, #{employerPositionIndustry,jdbcType=VARCHAR},
+        #{employerPositionCity,jdbcType=VARCHAR}, #{employerPositionState,jdbcType=VARCHAR}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.EmployerPosition">
+        update employer_position
+        set position_requirement_id               = #{positionRequirementId,jdbcType=INTEGER},
+            employer_account_id                   = #{employerAccountId,jdbcType=INTEGER},
+            employer_position_title               = #{employerPositionTitle,jdbcType=VARCHAR},
+            employer_position_content             = #{employerPositionContent,jdbcType=VARCHAR},
+            employer_position_person_num          = #{employerPositionPersonNum,jdbcType=VARCHAR},
+            employer_position_img                 = #{employerPositionImg,jdbcType=VARCHAR},
+            employer_position_salary              = #{employerPositionSalary,jdbcType=VARCHAR},
+            employer_position_settlement          = #{employerPositionSettlement,jdbcType=VARCHAR},
+            employer_position_welfare             = #{employerPositionWelfare,jdbcType=VARCHAR},
+            employer_position_place               = #{employerPositionPlace,jdbcType=VARCHAR},
+            employer_position_date                = #{employerPositionDate,jdbcType=VARCHAR},
+            employer_position_connect_type        = #{employerPositionConnectType,jdbcType=VARCHAR},
+            employer_position_connect_info        = #{employerPositionConnectInfo,jdbcType=VARCHAR},
+            employer_position_person_requirements = #{employerPositionPersonRequirements,jdbcType=VARCHAR},
+            employer_position_industry            = #{employerPositionIndustry,jdbcType=VARCHAR},
+            employer_position_city                = #{employerPositionCity,jdbcType=VARCHAR},
+            employer_position_state               = #{employerPositionState,jdbcType=VARCHAR}
+        where employer_position_id = #{employerPositionId,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select employer_position_id,
+               position_requirement_id,
+               employer_account_id,
+               employer_position_title,
+               employer_position_content,
+               employer_position_person_num,
+               employer_position_img,
+               employer_position_salary,
+               employer_position_settlement,
+               employer_position_welfare,
+               employer_position_place,
+               employer_position_date,
+               employer_position_connect_type,
+               employer_position_connect_info,
+               employer_position_person_requirements,
+               employer_position_industry,
+               employer_position_city,
+               employer_position_state
+        from employer_position
+        where employer_position_id = #{employerPositionId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select employer_position_id,
+               position_requirement_id,
+               employer_account_id,
+               employer_position_title,
+               employer_position_content,
+               employer_position_person_num,
+               employer_position_img,
+               employer_position_salary,
+               employer_position_settlement,
+               employer_position_welfare,
+               employer_position_place,
+               employer_position_date,
+               employer_position_connect_type,
+               employer_position_connect_info,
+               employer_position_person_requirements,
+               employer_position_industry,
+               employer_position_city,
+               employer_position_state
+        from employer_position
+    </select>
+
+    <select id="selectAllByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select employer_position_id,
+               position_requirement_id,
+               employer_account_id,
+               employer_position_title,
+               employer_position_content,
+               employer_position_person_num,
+               employer_position_img,
+               employer_position_salary,
+               employer_position_settlement,
+               employer_position_welfare,
+               employer_position_place,
+               employer_position_date,
+               employer_position_connect_type,
+               employer_position_connect_info,
+               employer_position_person_requirements,
+               employer_position_industry,
+               employer_position_city,
+               employer_position_state
+        from employer_position
+        where employer_position_state = '招聘中'
+            <if test="param != null and param != ''">
+                and employer_position_industry = #{param,jdbcType=VARCHAR}
+            </if>
+    </select>
+
+
+    <select id="selectAllByAccountState" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select employer_position_id,
+               position_requirement_id,
+               employer_account_id,
+               employer_position_title,
+               employer_position_content,
+               employer_position_person_num,
+               employer_position_img,
+               employer_position_salary,
+               employer_position_settlement,
+               employer_position_welfare,
+               employer_position_place,
+               employer_position_date,
+               employer_position_connect_type,
+               employer_position_connect_info,
+               employer_position_person_requirements,
+               employer_position_industry,
+               employer_position_city,
+               employer_position_state
+        from employer_position
+        where employer_account_id = #{accountId,jdbcType=INTEGER}
+          and employer_position_state = #{state,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.RecordsMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.Records">
+        <id column="record_id" jdbcType="INTEGER" property="recordId"/>
+        <result column="employer_account_id" jdbcType="INTEGER" property="employerAccountId"/>
+        <result column="employer_position_id" jdbcType="INTEGER" property="employerPositionId"/>
+        <result column="users_account_id" jdbcType="INTEGER" property="usersAccountId"/>
+        <result column="record_state_user" jdbcType="VARCHAR" property="recordStateUser"/>
+        <result column="record_state_employer" jdbcType="VARCHAR" property="recordStateEmployer"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from records
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.Records">
+        insert into records (record_id, employer_account_id, employer_position_id,
+                             users_account_id, record_state_user, record_state_employer)
+        values (#{recordId,jdbcType=INTEGER}, #{employerAccountId,jdbcType=INTEGER},
+                #{employerPositionId,jdbcType=INTEGER},
+                #{usersAccountId,jdbcType=INTEGER}, #{recordStateUser,jdbcType=VARCHAR},
+                #{recordStateEmployer,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.Records">
+        update records
+        set employer_account_id   = #{employerAccountId,jdbcType=INTEGER},
+            employer_position_id  = #{employerPositionId,jdbcType=INTEGER},
+            users_account_id      = #{usersAccountId,jdbcType=INTEGER},
+            record_state_user     = #{recordStateUser,jdbcType=VARCHAR},
+            record_state_employer = #{recordStateEmployer,jdbcType=VARCHAR}
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.Records">
+        update records
+        <set>
+            <if test="employerAccountId != null">
+                employer_account_id = #{employerAccountId,jdbcType=INTEGER},
+            </if>
+            <if test="employerPositionId != null">
+                employer_position_id = #{employerPositionId,jdbcType=INTEGER},
+            </if>
+            <if test="usersAccountId != null">
+                users_account_id = #{usersAccountId,jdbcType=INTEGER},
+            </if>
+            <if test="recordStateUser != null">
+                record_state_user = #{recordStateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="recordStateEmployer != null">
+                record_state_employer = #{recordStateEmployer,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select record_id,
+               employer_account_id,
+               employer_position_id,
+               users_account_id,
+               record_state_user,
+               record_state_employer
+        from records
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByAllID" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select record_id,
+               employer_account_id,
+               employer_position_id,
+               users_account_id,
+               record_state_user,
+               record_state_employer
+        from records
+        where employer_account_id = #{employerAccountId,jdbcType=INTEGER}
+          and employer_position_id = #{positionId,jdbcType=INTEGER}
+          and users_account_id = #{userAccountId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select record_id,
+               employer_account_id,
+               employer_position_id,
+               users_account_id,
+               record_state_user,
+               record_state_employer
+        from records
+    </select>
+
+    <select id="selectAllByUserAccountId" resultMap="BaseResultMap">
+        select record_id,
+               employer_account_id,
+               employer_position_id,
+               users_account_id,
+               record_state_user,
+               record_state_employer
+        from records
+        where users_account_id = #{userAccountId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAllByEmployerAccountId" resultMap="BaseResultMap">
+        select record_id,
+               employer_account_id,
+               employer_position_id,
+               users_account_id,
+               record_state_user,
+               record_state_employer
+        from records
+        where employer_account_id = #{employerAccountId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAllByEmployerAccountIdType" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select record_id,
+        employer_account_id,
+        employer_position_id,
+        users_account_id,
+        record_state_user,
+        record_state_employer
+        from records
+        where employer_account_id = #{employerAccountId,jdbcType=INTEGER}
+        <if test="type != ''">
+            and record_state_employer = #{type,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

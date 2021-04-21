@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tutorial ;
+
+//import "google/protobuf/any.proto";
+
+option java_package = "com.example.mydegign.common";//指定java代码的包路径
+option java_outer_classname = "MessageProto";//自定义生成java文件的名称
+
+
+message Message {
+  int32 clientID = 1;
+  string body = 2;
+  int32 receiveId = 3;
+  string msgType = 4;
+
+  enum MessageType {
+    PING    = 0;
+    LOGIN   = 1;
+    MESSAGE = 2;
+    LOGOUT  = 3;
+  }
+}

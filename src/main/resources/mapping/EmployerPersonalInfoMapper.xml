@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mydegign.mapper.EmployerPersonalInfoMapper">
+    <resultMap id="BaseResultMap" type="com.example.mydegign.entity.EmployerPersonalInfo">
+        <id column="employer_personal_info_id" jdbcType="INTEGER" property="employerPersonalInfoId"/>
+        <result column="employer_personal_info_head" jdbcType="VARCHAR" property="employerPersonalInfoHead"/>
+        <result column="employer_personal_info_name" jdbcType="VARCHAR" property="employerPersonalInfoName"/>
+        <result column="employer_personal_info_id_card_num" jdbcType="VARCHAR"
+                property="employerPersonalInfoIdCardNum"/>
+        <result column="employer_personal_info_id_card_front" jdbcType="VARCHAR"
+                property="employerPersonalInfoIdCardFront"/>
+        <result column="employer_personal_info_id_card_back" jdbcType="VARCHAR"
+                property="employerPersonalInfoIdCardBack"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from employer_personal_info
+        where employer_personal_info_id = #{employerPersonalInfoId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.mydegign.entity.EmployerPersonalInfo">
+        <selectKey keyProperty="employerPersonalInfoId" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+        insert into employer_personal_info (employer_personal_info_id, employer_personal_info_head,
+        employer_personal_info_name, employer_personal_info_id_card_num,
+        employer_personal_info_id_card_front, employer_personal_info_id_card_back
+        )
+        values (#{employerPersonalInfoId,jdbcType=INTEGER}, #{employerPersonalInfoHead,jdbcType=VARCHAR},
+        #{employerPersonalInfoName,jdbcType=VARCHAR}, #{employerPersonalInfoIdCardNum,jdbcType=VARCHAR},
+        #{employerPersonalInfoIdCardFront,jdbcType=VARCHAR}, #{employerPersonalInfoIdCardBack,jdbcType=VARCHAR}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.EmployerPersonalInfo">
+        update employer_personal_info
+        set employer_personal_info_head          = #{employerPersonalInfoHead,jdbcType=VARCHAR},
+            employer_personal_info_name          = #{employerPersonalInfoName,jdbcType=VARCHAR},
+            employer_personal_info_id_card_num   = #{employerPersonalInfoIdCardNum,jdbcType=VARCHAR},
+            employer_personal_info_id_card_front = #{employerPersonalInfoIdCardFront,jdbcType=VARCHAR},
+            employer_personal_info_id_card_back  = #{employerPersonalInfoIdCardBack,jdbcType=VARCHAR}
+        where employer_personal_info_id = #{employerPersonalInfoId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.EmployerPersonalInfo">
+        update employer_personal_info
+        <set>
+            <if test="employerPersonalInfoHead != null">
+                employer_personal_info_head = #{employerPersonalInfoHead,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPersonalInfoName != null">
+                employer_personal_info_name = #{employerPersonalInfoName,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPersonalInfoIdCardNum != null">
+                employer_personal_info_id_card_num = #{employerPersonalInfoIdCardNum,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPersonalInfoIdCardFront != null">
+                employer_personal_info_id_card_front = #{employerPersonalInfoIdCardFront,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPersonalInfoIdCardBack != null">
+                employer_personal_info_id_card_back = #{employerPersonalInfoIdCardBack,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where employer_personal_info_id = #{employerPersonalInfoId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select employer_personal_info_id,
+               employer_personal_info_head,
+               employer_personal_info_name,
+               employer_personal_info_id_card_num,
+               employer_personal_info_id_card_front,
+               employer_personal_info_id_card_back
+        from employer_personal_info
+        where employer_personal_info_id = #{employerPersonalInfoId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select employer_personal_info_id,
+               employer_personal_info_head,
+               employer_personal_info_name,
+               employer_personal_info_id_card_num,
+               employer_personal_info_id_card_front,
+               employer_personal_info_id_card_back
+        from employer_personal_info
+    </select>
+</mapper>
