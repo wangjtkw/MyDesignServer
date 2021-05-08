@@ -3,6 +3,8 @@ package com.example.mydegign.controller;
 import com.example.mydegign.common.ErrorCode;
 import com.example.mydegign.common.MyResponseBody;
 import com.example.mydegign.common.UploadUtils;
+import com.example.mydegign.common.state.AuditState;
+import com.example.mydegign.common.state.EmployerPositionState;
 import com.example.mydegign.common.state.EmployerRecordState;
 import com.example.mydegign.common.state.UserRecordState;
 import com.example.mydegign.entity.*;
@@ -49,6 +51,9 @@ public class UserController {
 
     @Autowired
     private RecordsService recordsService;
+
+    @Autowired
+    private EmployerPersonalInfoService employerPersonalInfoService;
 
     @RequestMapping("/register")
     @ResponseBody
@@ -252,7 +257,8 @@ public class UserController {
     @ResponseBody
     @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     public Object getJobList(String type) {
-        List<EmployerPosition> positionList = employerPositionService.selectAllByType(type);
+        List<EmployerPosition> positionList = employerPositionService.selectAllByType(
+                EmployerPositionState.RECRUIT, type);
         System.out.println(positionList.toString());
         ArrayList<PositionResponseBean> result = new ArrayList<>();
         for (EmployerPosition position : positionList) {
@@ -286,13 +292,25 @@ public class UserController {
             positionRequirement = positionRequirementService.selectById(position.getPositionRequirementId());
         }
         EmployerAccount account = employerAccountService.selectById(position.getEmployerAccountId());
-        System.out.println(account.toString());
         EmployerCompanyInfo companyInfo = employerCompanyInfoService.selectById(account.getEmployerCompanyInfo());
-        System.out.println(companyInfo);
-        PositionResponseBean responseBean = new PositionResponseBean(position, positionRequirement, companyInfo);
+        EmployerPersonalInfo personalInfo = employerPersonalInfoService.selectById(account.getEmployerPersonalInfoId());
+        PositionResponseBean responseBean = new PositionResponseBean(position, positionRequirement, companyInfo, personalInfo);
         return new MyResponseBody(200, "OK", responseBean);
 
     }
+
+    @RequestMapping("/get/employer/personalInfo")
+    @ResponseBody
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
+    public Object getEmployerInfo(int employerAccountId) {
+        EmployerAccount account = employerAccountService.selectById(employerAccountId);
+        if (account == null) {
+            return new MyResponseBody(ErrorCode.PARAMETER_ERROR_CODE, ErrorCode.PARAMETER_ERROR_DESCRIBE + "当前编号不存在！");
+        }
+        EmployerPersonalInfo personalInfo = employerPersonalInfoService.selectById(account.getEmployerPersonalInfoId());
+        return new MyResponseBody(200, "OK", personalInfo);
+    }
+
 
     /**
      * userState：已报名 已录取 已结束

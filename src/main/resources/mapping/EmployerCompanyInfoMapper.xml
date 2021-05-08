@@ -42,7 +42,7 @@
         #{employerCompanyInfoBusinessScope,jdbcType=VARCHAR}, #{employerCompanyInfoAuditState,jdbcType=VARCHAR}
         )
     </insert>
-    <update id="updateByPrimaryKey" parameterType="com.example.mydegign.entity.EmployerCompanyInfo">
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.EmployerCompanyInfo">
         update employer_company_info
         <set>
             <if test="employerCompanyInfoName != null">

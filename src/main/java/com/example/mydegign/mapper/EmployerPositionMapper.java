@@ -18,7 +18,12 @@ public interface EmployerPositionMapper {
 
     List<EmployerPosition> selectAllByAccountState(@Param("accountId") Integer accountId, @Param("state") String state);
 
-    List<EmployerPosition> selectAllByType(String param);
+    List<EmployerPosition> selectAllByType(
+            @Param("type") String type,
+            @Param("param") String param);
 
     int updateByPrimaryKey(EmployerPosition record);
+
+    int updateByPrimaryKeySelective(EmployerPosition record);
+
 }

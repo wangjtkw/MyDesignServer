@@ -277,6 +277,7 @@ public class EmployerController {
         if (companyInfo.getEmployerCompanyInfoId() == null) {
             return new MyResponseBody(ErrorCode.PARAMETER_ERROR_CODE, ErrorCode.PARAMETER_ERROR_DESCRIBE + "当前编号不存在");
         }
+        System.out.println("companyInfo" + companyInfo);
         companyInfo.setEmployerCompanyInfoAuditState("待审批");
         employerCompanyInfoService.updateByPrimaryKeySelective(companyInfo);
         return new MyResponseBody(200, "OK", companyInfo);
@@ -461,5 +462,21 @@ public class EmployerController {
         recordsService.updateByPrimaryKeySelective(records);
         return new MyResponseBody(200, "OK");
     }
+
+    @RequestMapping("/get/user/info")
+    @ResponseBody
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
+    public Object getUserInfo(int userAccountId) {
+        UsersAccount account = usersAccountService.selectById(userAccountId);
+        if (account == null) {
+            return new MyResponseBody(ErrorCode.PARAMETER_ERROR_CODE, ErrorCode.PARAMETER_ERROR_DESCRIBE + "当前编号不存在");
+        }
+        Users users = usersService.selectById(account.getUsersId());
+        if (users == null) {
+            return new MyResponseBody(ErrorCode.PARAMETER_ERROR_CODE, ErrorCode.PARAMETER_ERROR_DESCRIBE + "当前编号不存在");
+        }
+        return new MyResponseBody(200, "OK", users);
+    }
+
 
 }

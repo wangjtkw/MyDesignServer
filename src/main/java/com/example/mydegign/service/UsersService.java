@@ -5,10 +5,16 @@ import com.example.mydegign.mapper.UsersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsersService {
     @Autowired
     private UsersMapper mapper;
+
+    public List<Users> selectAll() {
+        return mapper.selectAll();
+    }
 
     public int insert(Users users) {
         return mapper.insert(users);

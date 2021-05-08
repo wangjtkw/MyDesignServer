@@ -73,6 +73,63 @@
             employer_position_state               = #{employerPositionState,jdbcType=VARCHAR}
         where employer_position_id = #{employerPositionId,jdbcType=INTEGER}
     </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mydegign.entity.EmployerPosition">
+        update employer_position
+        <set>
+            <if test="employerAccountId != null">
+                employer_account_id = #{employerAccountId,jdbcType=INTEGER},
+            </if>
+            <if test="employerPositionTitle != null">
+                employer_position_title = #{employerPositionTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionContent != null">
+                employer_position_content = #{employerPositionContent,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionPersonNum != null">
+                employer_position_person_num = #{employerPositionPersonNum,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionImg != null">
+                employer_position_img = #{employerPositionImg,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionSalary != null">
+                employer_position_salary = #{employerPositionSalary,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionSettlement != null">
+                employer_position_settlement = #{employerPositionSettlement,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionWelfare != null">
+                employer_position_welfare = #{employerPositionWelfare,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionPlace != null">
+                employer_position_place = #{employerPositionPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionDate != null">
+                employer_position_date = #{employerPositionDate,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionConnectType != null">
+                employer_position_connect_type = #{employerPositionConnectType,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionConnectInfo != null">
+                employer_position_connect_info = #{employerPositionConnectInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionPersonRequirements != null">
+                employer_position_person_requirements = #{employerPositionPersonRequirements,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionIndustry != null">
+                employer_position_industry = #{employerPositionIndustry,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionCity != null">
+                employer_position_city = #{employerPositionCity,jdbcType=VARCHAR},
+            </if>
+            <if test="employerPositionState != null">
+                employer_position_state = #{employerPositionState,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where employer_position_id = #{employerPositionId,jdbcType=INTEGER}
+    </update>
+
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select employer_position_id,
                position_requirement_id,
@@ -117,30 +174,30 @@
         from employer_position
     </select>
 
-    <select id="selectAllByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectAllByType" parameterType="java.util.Map" resultMap="BaseResultMap">
         select employer_position_id,
-               position_requirement_id,
-               employer_account_id,
-               employer_position_title,
-               employer_position_content,
-               employer_position_person_num,
-               employer_position_img,
-               employer_position_salary,
-               employer_position_settlement,
-               employer_position_welfare,
-               employer_position_place,
-               employer_position_date,
-               employer_position_connect_type,
-               employer_position_connect_info,
-               employer_position_person_requirements,
-               employer_position_industry,
-               employer_position_city,
-               employer_position_state
+        position_requirement_id,
+        employer_account_id,
+        employer_position_title,
+        employer_position_content,
+        employer_position_person_num,
+        employer_position_img,
+        employer_position_salary,
+        employer_position_settlement,
+        employer_position_welfare,
+        employer_position_place,
+        employer_position_date,
+        employer_position_connect_type,
+        employer_position_connect_info,
+        employer_position_person_requirements,
+        employer_position_industry,
+        employer_position_city,
+        employer_position_state
         from employer_position
-        where employer_position_state = '招聘中'
-            <if test="param != null and param != ''">
-                and employer_position_industry = #{param,jdbcType=VARCHAR}
-            </if>
+        where employer_position_state = #{type,jdbcType=VARCHAR}
+        <if test="param != null and param != ''">
+            and employer_position_industry = #{param,jdbcType=VARCHAR}
+        </if>
     </select>
 
 

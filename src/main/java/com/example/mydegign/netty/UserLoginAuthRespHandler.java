@@ -17,7 +17,6 @@ public class UserLoginAuthRespHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         MessageProto.Message message = (MessageProto.Message) msg;
-        System.out.println("run1 " + message.getBody());
         if (message == null) {
             ReferenceCountUtil.release(msg);
         } else {

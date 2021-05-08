@@ -21,6 +21,10 @@ public class EmployerCompanyInfoService {
         return mapper.selectByPrimaryKey(companyInfoId);
     }
 
+    public List<EmployerCompanyInfo> selectAll() {
+        return mapper.selectAll();
+    }
+
     public List<EmployerCompanyInfo> selectAllByState(String state) {
         return mapper.selectAllByState(state);
     }

@@ -21,13 +21,16 @@ public class EmployerPositionService {
         return mapper.selectAllByAccountState(accountId, state);
     }
 
-    public List<EmployerPosition> selectAllByType(String param) {
-        return mapper.selectAllByType(param);
+    public List<EmployerPosition> selectAllByType(String type, String param) {
+        return mapper.selectAllByType(type, param);
     }
 
     public EmployerPosition selectById(int positionId) {
         return mapper.selectByPrimaryKey(positionId);
     }
 
+    public int updateByPrimaryKeySelective(EmployerPosition record) {
+        return mapper.updateByPrimaryKeySelective(record);
+    }
 
 }
